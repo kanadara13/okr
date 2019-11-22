@@ -1,5 +1,6 @@
 buildscript {
     repositories {
+        mavenCentral()
         jcenter()
     }
     
@@ -31,5 +32,8 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     compile "io.ktor:ktor-server-netty:$ktor_version"
     compile "ch.qos.logback:logback-classic:$logback_version"
+    compile "com.h2database:h2:$h2_version"
+    compile "org.jetbrains.exposed:exposed:$exposed_version"
+    compile 'com.zaxxer:HikariCP:3.4.1'
     testCompile "io.ktor:ktor-server-tests:$ktor_version"
 }

@@ -18,6 +18,7 @@ import io.ktor.server.netty.Netty
 @kotlin.jvm.JvmOverloads
 fun Application.module(testing: Boolean = false) {
     DatabaseFactory.init(isDev)
+    
 }
 
 val Application.env get() = environment.config.config("ktor.environment").property("environment").getString()

@@ -1,8 +1,10 @@
 package com.platform.objectives.entity
 
-import org.jetbrains.exposed.dao.IntEntity
-import org.jetbrains.exposed.dao.IntIdTable
+import com.platform.exposed.IntIdTableWithDatetime
 
-object ObjectivesTable : IntIdTable("objectives") {
+object ObjectivesTable : IntIdTableWithDatetime("objectives") {
     var title = varchar("title",200)
+    var groupNo = integer("groupNo")
 }
+
+

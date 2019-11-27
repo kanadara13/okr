@@ -1,10 +1,14 @@
 package com.platform.database
 
+import com.platform.group.entity.GroupTable
+import com.platform.member.entity.MemberGroupTable
+import com.platform.member.entity.MemberTable
 import com.platform.objectives.entity.ObjectivesTable
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils.create
+import org.jetbrains.exposed.sql.Table
 import org.jetbrains.exposed.sql.transactions.transaction
 
 
@@ -18,6 +22,9 @@ object DatabaseFactory {
     private fun initDatabase() {
         transaction {
             create(ObjectivesTable)
+            create(MemberTable)
+            create(GroupTable)
+            create(MemberGroupTable)
         }
     }
 

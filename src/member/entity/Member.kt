@@ -14,19 +14,24 @@ class Member(id: EntityID<Int>) : IntEntity(id) {
     var name     by MemberTable.name
     var email    by MemberTable.email
     var password by MemberTable.password
+    var createdAt by MemberTable.createdAt
+    var updatedAt by MemberTable.updatedAt
 }
 
-object MemberGroupTable : IntIdTable("memberGroup") {
-    var groupNo = integer("groupNo")
+class MemberView {
+
+}
+
+object MemberGroupTable : IntIdTableWithDatetime("memberGroup") {
     var memberNo = integer("memberNo")
-    init {
-        uniqueIndex(groupNo, memberNo)
-    }
+    var groupName = varchar("name", 200)
 }
 
 class MemberGroup(id: EntityID<Int>) : IntEntity(id) {
     companion object : IntEntityClass<MemberGroup>(MemberGroupTable)
-    var groupNo = MemberGroupTable.integer("groupNo")
-    var memberNo = MemberGroupTable.integer("memberNo")
+    var memberNo  by MemberGroupTable.memberNo
+    var groupName by MemberGroupTable.groupName
+    var createdAt by MemberGroupTable.createdAt
+    var updatedAt by MemberGroupTable.updatedAt
 }
 

@@ -1,19 +1,12 @@
 package com.platform
 
+import com.platform.com.platform.member.service.MemberFinder
+import com.platform.component.ComponentFactory
+import com.platform.com.platform.router.member
 import com.platform.database.DatabaseFactory
-import com.platform.member.domain.NewMember
 import com.platform.member.service.MemberSaver
-import com.typesafe.config.ConfigFactory
 import io.ktor.application.*
-import io.ktor.config.HoconApplicationConfig
-import io.ktor.http.HttpStatusCode
-import io.ktor.response.*
-import io.ktor.request.*
-import io.ktor.routing.post
 import io.ktor.routing.routing
-import io.ktor.server.engine.commandLineEnvironment
-import io.ktor.server.engine.embeddedServer
-import io.ktor.server.netty.Netty
 
 /*fun main(args: Array<String>) {
     embeddedServer(Netty, commandLineEnvironment(args)).start()
@@ -23,14 +16,10 @@ import io.ktor.server.netty.Netty
 @kotlin.jvm.JvmOverloads
 fun Application.module(testing: Boolean = false) {
     DatabaseFactory.init(isDev)
-
     val memberSaver = MemberSaver()
-
+    val memberFinder = MemberFinder()
     routing {
-        post("/member") {
-            val request = call.receive<NewMember>()
-            call.respond(HttpStatusCode.Created, memberSaver.save(request))
-        }
+        member(memberSaver = memberSaver, finder = memberFinder)
     }
 }
 

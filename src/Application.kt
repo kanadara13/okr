@@ -27,8 +27,7 @@ fun Application.module(testing: Boolean = false) {
     val memberSaver = MemberSaver()
 
     routing {
-
-        post("/member/") {
+        post("/member") {
             val request = call.receive<NewMember>()
             call.respond(HttpStatusCode.Created, memberSaver.save(request))
         }

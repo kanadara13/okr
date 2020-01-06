@@ -6,9 +6,12 @@ import com.platform.member.entity.MemberTable
 import com.platform.objectives.entity.ObjectivesTable
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils.create
 import org.jetbrains.exposed.sql.Table
+import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
 
 
@@ -27,6 +30,16 @@ object DatabaseFactory {
             create(MemberGroupTable)
         }
     }
+
+    suspend fun <T> dbQuery(block: () -> T): T =  withContext(Dispatchers.IO) {
+            transaction { block() }
+    }
+
+/*
+    suspend fun getAllWidgets(): List<Widget> = dbQuery {
+        Widgets.selectAll().map { toWidget(it) }
+    }
+*/
 
 
     private fun hikari(dev: Boolean): HikariDataSource {

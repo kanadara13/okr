@@ -3,6 +3,7 @@ package member.service
 import com.platform.database.DatabaseFactory
 import com.platform.member.domain.NewMember
 import com.platform.member.service.MemberSaver
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
@@ -29,4 +30,10 @@ class MemberSaverTest {
         val saver = MemberSaver()
         saver.save(NewMember("email$i","name$i","password$i"))
     }
+
+ /*   private suspend fun aa(i: Int) {
+        val time = measureTimeMillis {
+            println("The answer is ${concurrentSum()}")
+        }
+    }*/
 }

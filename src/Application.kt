@@ -1,12 +1,14 @@
 package com.platform
 
 import com.platform.com.platform.member.service.MemberFinder
-import com.platform.component.ComponentFactory
-import com.platform.com.platform.router.member
+import com.platform.router.member
 import com.platform.database.DatabaseFactory
 import com.platform.member.service.MemberSaver
 import io.ktor.application.*
+import io.ktor.features.ContentNegotiation
+import io.ktor.gson.gson
 import io.ktor.routing.routing
+import java.text.DateFormat
 
 /*fun main(args: Array<String>) {
     embeddedServer(Netty, commandLineEnvironment(args)).start()
@@ -18,6 +20,14 @@ fun Application.module(testing: Boolean = false) {
     DatabaseFactory.init(isDev)
     val memberSaver = MemberSaver()
     val memberFinder = MemberFinder()
+
+    install(ContentNegotiation) {
+        gson {
+            setDateFormat(DateFormat.LONG)
+            setPrettyPrinting()
+        }
+    }
+
     routing {
         member(memberSaver = memberSaver, finder = memberFinder)
     }

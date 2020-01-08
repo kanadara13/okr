@@ -36,4 +36,6 @@ dependencies {
     compile "org.jetbrains.exposed:exposed:+"
     compile 'com.zaxxer:HikariCP:+'
     testCompile "io.ktor:ktor-server-tests:+"
+    implementation "io.ktor:ktor-jackson:+"
+    implementation "io.ktor:ktor-gson:+"
 }

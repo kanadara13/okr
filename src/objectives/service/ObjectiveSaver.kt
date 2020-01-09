@@ -20,7 +20,7 @@ class ObjectiveSaver {
                 this.createdAt = DateTime.now()
                 this.updatedAt = DateTime.now()
             }
-            objectives
+            objectives.toView()
         }
     }
 }

@@ -27,7 +27,7 @@ class MemberSaver{
                 this.createdAt = DateTime.now()
                 this.updatedAt = DateTime.now()
             }
-            member
+            member.toView()
         }
     }
 }

@@ -2,6 +2,8 @@ package com.platform.member.entity
 
 import com.platform.exposed.IntIdTableWithDatetime
 import org.jetbrains.exposed.dao.*
+import org.joda.time.format.DateTimeFormat.forPattern
+
 
 object MemberTable : IntIdTableWithDatetime("member") {
     var name  = varchar("name", 200)
@@ -10,6 +12,8 @@ object MemberTable : IntIdTableWithDatetime("member") {
 }
 
 class Member(id: EntityID<Int>) : IntEntity(id) {
+    fun toView() = MemberView(id.value, name, email, createdAt.toString(forPattern("yyyy-MM-dd hh:mm:ss")), updatedAt.toString(forPattern("yyyy-MM-dd hh:mm:ss")))
+
     companion object : IntEntityClass<Member>(MemberTable)
     var name     by MemberTable.name
     var email    by MemberTable.email
@@ -18,9 +22,7 @@ class Member(id: EntityID<Int>) : IntEntity(id) {
     var updatedAt by MemberTable.updatedAt
 }
 
-class MemberView {
-
-}
+class MemberView(val id : Int, val name : String, val email : String, val createdAt : String, val updatedAt : String)
 
 object MemberGroupTable : IntIdTableWithDatetime("memberGroup") {
     var memberNo = integer("memberNo")

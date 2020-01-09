@@ -1,8 +1,10 @@
 package com.platform.router
 
-import com.platform.com.platform.member.service.MemberFinder
 import com.platform.member.domain.NewMember
+import com.platform.member.service.MemberFinder
 import com.platform.member.service.MemberSaver
+import com.platform.objectives.domain.NewObjectives
+import com.platform.objectives.service.ObjectiveSaver
 import io.ktor.application.call
 import io.ktor.http.HttpStatusCode
 import io.ktor.request.receive
@@ -23,3 +25,16 @@ fun Route.member(memberSaver: MemberSaver, finder : MemberFinder) {
         }
     }
 }
+
+fun Route.objectives(objectiveSaver: ObjectiveSaver) {
+    route("/objectives") {
+        get {
+            call.respond(HttpStatusCode.OK, "objectives")
+        }
+        post {
+            val request = call.receive<NewObjectives>()
+            call.respond(HttpStatusCode.Created, objectiveSaver.save(request))
+        }
+    }
+}
+

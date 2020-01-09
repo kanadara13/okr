@@ -1,8 +1,5 @@
 package com.platform.objectives.service
 
-import com.platform.member.domain.NewMember
-import com.platform.member.entity.Member
-import com.platform.member.entity.MemberGroup
 import com.platform.objectives.domain.NewObjectives
 import com.platform.objectives.entity.Objectives
 import kotlinx.coroutines.Dispatchers
